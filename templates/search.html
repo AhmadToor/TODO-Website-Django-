@@ -1,0 +1,29 @@
+{% extends 'base.html' %}
+{% block title %}Search | TodoList{% endblock %}
+{% block content %}
+<div>
+    <h3 class='todolist'>Your Search Result:</h3>
+    <div class='container car'>
+        {% if todo %}
+        {% for todo in todo %}
+        <div class="card">
+            <div class="card-body">
+                <h5 class="card-title">{{ todo.title }}</h5>
+                <p class="card-text">{{ todo.content }}</p>
+                {% if admin %}
+                <p class="card-text"><i>Author | {{todo.user}}</i></p>
+                {% endif %}
+                <button class="btn btn-primary" data-title="{{ todo.title }}" data-content="{{todo.content}}"
+                    onclick="location.href = '/delete/' + this.getAttribute('data-title') + '/' + this.getAttribute('data-content') + '/'">Done</button>
+                <button class="btn btn-outline-secondary edit-button" data-title="{{ todo.title }}"
+                    data-content="{{todo.content}}" data-bs-toggle="modal"
+                    data-bs-target="#exampleModalCenter">Edit</button>
+            </div>
+        </div>
+        {% endfor %}
+        {% else %}
+        <p class='container car'>No result found.</p>
+        {% endif %}
+    </div>
+</div>
+{% endblock %}

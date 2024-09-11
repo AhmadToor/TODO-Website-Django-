@@ -1,0 +1,28 @@
+{% extends "base.html" %}
+{% block title %}List | TodoList{% endblock %}
+{% block content %}
+{% if todos %}
+<div class='container car'>
+    {% for todo in todos %}
+    <div class="card">
+        <div class="card-body">
+            <h5 class="card-title">{{ todo.title }}</h5>
+            <p class="card-text">{{ todo.content }}</p>
+            {% if admin %}
+            <p class="card-text"><i>Author | {{todo.user}}</i></p>
+            {% endif %}
+            <button class="btn btn-primary" data-title="{{ todo.title }}" data-content="{{todo.content}}"
+                onclick="location.href = '/delete/' + this.getAttribute('data-title') + '/' + this.getAttribute('data-content') + '/'">Done</button>
+            <button class="btn btn-outline-secondary edit-button" data-title="{{ todo.title }}"
+                data-content="{{todo.content}}" data-bs-toggle="modal"
+                data-bs-target="#exampleModalCenter">Edit</button>
+        </div>
+    </div>
+    {% endfor %}
+</div>
+{% else %}
+<div class='container car'>
+    No Todos to display
+</div>
+{% endif %}
+{% endblock %}
